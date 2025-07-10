@@ -1,0 +1,325 @@
+// Variables (Optional: If you have custom Bootstrap variables, create a _variables.scss and import it here)
+// @import 'variables';
+
+// Bootstrap
+@import "bootstrap/scss/bootstrap";
+
+// Custom Fonts (Optional - Inter font is good, you can also use Google Fonts)
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
+// Global Styles
+body {
+    font-family: "Inter", sans-serif;
+    background-color: #f0f2f5; /* Light gray background for consistency */
+    padding-top: 56px; /* For fixed-top navbar */
+}
+
+a {
+    text-decoration: none; /* Remove underline from links */
+}
+
+// Custom Colors (Example Palette)
+:root {
+    --primary-color: #007bff; /* Bootstrap Primary */
+    --secondary-color: #6c757d; /* Bootstrap Secondary */
+    --accent-color: #28a745; /* Bootstrap Success */
+    --text-color: #343a40;
+    --light-bg: #f8f9fa;
+    --dark-bg: #343a40;
+}
+
+// Define Sass variables for colors that will be used with Sass functions
+$primary-color-sass: #007bff; // Nilai hex langsung untuk fungsi Sass
+$secondary-color-sass: #6c757d;
+$accent-color-sass: #28a745;
+$text-color-sass: #343a40;
+$light-bg-sass: #f8f9fa;
+$dark-bg-sass: #343a40;
+
+// Reusable Mixins & Utility Classes
+.shadow-sm-custom {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+}
+.shadow-lg-custom {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+// Animations
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 20px, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.animated {
+    animation-duration: 0.6s;
+    animation-fill-mode: both;
+}
+.fadeInUp {
+    animation-name: fadeInUp;
+}
+.fadeIn {
+    animation-name: fadeIn;
+}
+
+// Navbar Enhancements (Public & Admin)
+.navbar {
+    background: linear-gradient(
+        to right,
+        var(--primary-color),
+        #0056b3
+    ); /* Subtle gradient */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #fff !important;
+}
+.nav-link {
+    color: rgba(255, 255, 255, 0.7) !important;
+    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+    position: relative;
+    overflow: hidden;
+
+    &:hover {
+        color: #fff !important;
+        transform: translateY(-2px); /* Slight lift on hover */
+    }
+
+    &.active {
+        color: #fff !important;
+        font-weight: 500;
+        &::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 2px;
+            background-color: #fff;
+            animation: slideInLine 0.3s forwards;
+        }
+    }
+}
+
+@keyframes slideInLine {
+    from {
+        width: 0;
+    }
+    to {
+        width: 80%;
+    }
+}
+
+// Buttons Enhancements
+.btn {
+    border-radius: 0.5rem;
+    transition: all 0.3s ease-in-out;
+    font-weight: 500;
+
+    &:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+}
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    &:hover {
+        background-color: darken(
+            $primary-color-sass,
+            10%
+        ); /* Menggunakan variabel Sass */
+        border-color: darken(
+            $primary-color-sass,
+            10%
+        ); /* Menggunakan variabel Sass */
+    }
+}
+.btn-outline-light:hover {
+    color: var(--primary-color) !important;
+}
+
+// Card Enhancements
+.card {
+    border: none;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Stronger shadow */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+
+    &:hover {
+        transform: translateY(-5px); /* Lift on hover */
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* More prominent shadow */
+    }
+}
+
+// Jumbotron/Banner Enhancement
+.jumbotron-fluid {
+    background: linear-gradient(
+        to bottom right,
+        #e0f2f7,
+        #c0e0eb
+    ); /* Soft blue gradient */
+    color: var(--text-color);
+    border-radius: 0; /* No rounded corners for full width */
+    margin-bottom: 0;
+    h1 {
+        font-weight: 700;
+        color: var(--primary-color);
+    }
+    p.lead {
+        font-weight: 400;
+        color: var(--secondary-color);
+    }
+}
+
+// Footer Enhancements
+.footer {
+    background-color: var(--dark-bg);
+    color: rgba(255, 255, 255, 0.8);
+    padding: 2rem 0;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+// Admin Sidebar Enhancements
+#sidebar-wrapper {
+    background: linear-gradient(
+        to bottom,
+        #343a40,
+        #212529
+    ); /* Darker gradient */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    min-width: 250px;
+    max-width: 250px;
+    color: #fff;
+    transition: all 0.3s ease;
+    height: 100vh;
+    overflow-y: auto;
+    position: sticky;
+    top: 0;
+}
+#sidebar-wrapper .sidebar-heading {
+    background-color: #1a1e21; /* Even darker header */
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.3rem;
+    padding: 1.5rem 1.25rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+#sidebar-wrapper .list-group-item {
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.6);
+    padding: 1rem 1.5rem;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+        color: #fff;
+        border-left-color: var(--primary-color);
+    }
+    &.active {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: #fff;
+        border-left-color: var(--primary-color);
+        font-weight: 500;
+    }
+}
+
+// Admin Page Content
+#page-content-wrapper {
+    background-color: #f0f2f5;
+    padding: 2rem;
+}
+.navbar-admin {
+    background-color: #fff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1.5rem;
+    border-radius: 0.5rem; /* Rounded topbar */
+}
+
+// Table Enhancements (Backend)
+.data-table-container {
+    background-color: #fff;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 1.5rem;
+    overflow-x: auto; /* Ensure responsiveness for tables */
+}
+.table {
+    margin-bottom: 0;
+    thead th {
+        background-color: var(--light-bg);
+        color: var(--text-color);
+        font-weight: 600;
+        border-bottom: 2px solid #dee2e6;
+    }
+    tbody tr:hover {
+        background-color: #e9ecef; /* Subtle hover for table rows */
+    }
+    td,
+    th {
+        vertical-align: middle;
+        padding: 0.75rem;
+    }
+    .badge {
+        font-size: 0.8em;
+        padding: 0.4em 0.7em;
+        border-radius: 0.3rem;
+    }
+}
+
+// Form Enhancements
+.form-control,
+.form-select,
+.form-control:focus,
+.form-select:focus {
+    border-radius: 0.5rem;
+    border-color: #ced4da;
+    box-shadow: none;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    &:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+    }
+}
+
+// Alert styling
+.alert {
+    border-radius: 0.5rem;
+    font-weight: 500;
+}
+
+// Animation delays for staggered effects (optional)
+.animated-delay-1 {
+    animation-delay: 0.1s;
+}
+.animated-delay-2 {
+    animation-delay: 0.2s;
+}
+.animated-delay-3 {
+    animation-delay: 0.3s;
+}
+.animated-delay-4 {
+    animation-delay: 0.4s;
+}
+.animated-delay-5 {
+    animation-delay: 0.5s;
+}
